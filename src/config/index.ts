@@ -1,9 +1,10 @@
 import { join } from 'path'
 import envSchema from 'env-schema'
+import ajvFormats from 'ajv-formats'
 
 const ENV_SCHEMA = {
   type: 'object',
-  required: ['PORT', 'HOST'],
+  required: ['PORT', 'HOST', 'DATABASE_URL'],
 
   properties: {
     PORT: {
@@ -25,14 +26,23 @@ const ENV_SCHEMA = {
       default: 'info'
     },
     DATABASE_URL: {
-      type: 'string'
+      type: 'string',
+      format: 'uri'
     }
   }
 }
 
-export default envSchema({
+envSchema({
   schema: ENV_SCHEMA,
   dotenv: {
     path: join(__dirname, '/../../../.env')
+  },
+  ajv: {
+    customOptions (ajvInstance) {
+      ajvFormats(ajvInstance)
+      return ajvInstance
+    }
   }
 })
+
+console.log(process.env.DATABASE_URL)
