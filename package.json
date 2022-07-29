@@ -7,7 +7,14 @@
     "build": "tsc -p tsconfig.json",
     "start": "npm run clean && npm run build && node dist/index.js",
     "clean": "rm -rf dist",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "db:up": "docker-compose up -d sarie-db",
+    "db:seed": "npx prisma db seed",
+    "db:down": "docker-compose down",
+    "db:delete": "docker-compose down -v",
+    "system:up": " npm run clean && npm run build && docker-compose up --build",
+    "system:down": "docker-compose down",
+    "system:nuke": "docker-compose down -v --rmi all"
   },
   "prisma": {
     "schema": "database/schema.prisma",
