@@ -35,6 +35,7 @@
   "homepage": "https://github.com/MomenNano/api-template#readme",
   "dependencies": {
     "@fastify/autoload": "^5.1.0",
+    "@fastify/rate-limit": "^7.3.0",
     "@fastify/redis": "^6.0.0",
     "@fastify/sensible": "^5.1.0",
     "@fastify/swagger": "^7.4.1",
