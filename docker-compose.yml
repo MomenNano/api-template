@@ -22,6 +22,20 @@ services:
       timeout: 5s
       retries: 5
 
+  redis:
+    image: redis:7-alpine
+    expose:
+      - 6379
+    ports:
+      - 6379:6379
+    networks:
+      - docker_network
+    healthcheck:
+      test: [ "CMD", "redis-cli", "--raw", "incr", "ping" ]
+      interval: 1s
+      timeout: 3s
+      retries: 30
+
   app-api:
     # restart: always
     depends_on:
