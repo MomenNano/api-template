@@ -12,6 +12,9 @@
     "db:seed": "npx prisma db seed",
     "db:down": "docker-compose down",
     "db:delete": "docker-compose down -v",
+    "redis:up": "docker-compose up -d redis",
+    "redis:down": "docker-compose down",
+    "redis:delete": "docker-compose down -v",
     "system:up": " npm run clean && npm run build && docker-compose up --build",
     "system:down": "docker-compose down",
     "system:nuke": "docker-compose down -v --rmi all"
