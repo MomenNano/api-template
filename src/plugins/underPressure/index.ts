@@ -1,14 +1,14 @@
 import { FastifyPluginAsync } from 'fastify'
 import fp from 'fastify-plugin'
-import underPressure, {
+import fastifyUnderPressure, {
   TYPE_EVENT_LOOP_DELAY,
   TYPE_EVENT_LOOP_UTILIZATION,
   TYPE_HEAP_USED_BYTES,
   TYPE_RSS_BYTES
 } from '@fastify/under-pressure'
 
-const build: FastifyPluginAsync = async fastify => {
-  void fastify.register(underPressure, {
+const underPressure: FastifyPluginAsync = async fastify => {
+  void fastify.register(fastifyUnderPressure, {
     maxEventLoopDelay: 1000,
     maxHeapUsedBytes: 100000000,
     maxRssBytes: 100000000,
@@ -55,4 +55,6 @@ const build: FastifyPluginAsync = async fastify => {
   })
 }
 
-export default fp(build)
+export default fp(underPressure, {
+  name: 'underPressure'
+})

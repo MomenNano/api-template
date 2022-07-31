@@ -40,5 +40,5 @@ const swaggerGenerator: FastifyPluginAsync = async (fastify, opts) => {
 }
 
 export default fp(swaggerGenerator, {
-  name: 'swaggerGenerator'
+  name: 'swagger'
 })

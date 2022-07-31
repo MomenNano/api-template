@@ -24,4 +24,6 @@ const redis: FastifyPluginAsync = async fastify => {
   })
 }
 
-export default fp(redis)
+export default fp(redis, {
+  name: 'redis'
+})

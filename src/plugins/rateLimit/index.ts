@@ -12,4 +12,7 @@ const rateLimit: FastifyPluginAsync = async fastify => {
   })
 }
 
-export default fp(rateLimit)
+export default fp(rateLimit, {
+  name: 'rateLimit',
+  dependencies: ['redis']
+})
