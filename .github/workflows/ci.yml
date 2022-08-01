@@ -24,5 +24,6 @@ jobs:
 
     - name: Install Dependencies
         run: npm install
+
     - name: Run Tests
         run: npm run test:unit
