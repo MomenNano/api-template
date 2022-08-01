@@ -25,5 +25,8 @@ jobs:
     - name: Install Dependencies
       run: npm  install --ignore-scripts
 
+    - name: Prisma generate
+      run: npx prisma generate
+
     - name: Run Tests
       run: npm run test:unit
