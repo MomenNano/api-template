@@ -23,6 +23,6 @@ jobs:
         node-version: 16
 
     - name: Install Dependencies
-        run: npm install --ignore-scripts
+        run: npm install
     - name: Run Tests
         run: npm run test:unit
