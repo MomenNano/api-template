@@ -9,6 +9,7 @@
     "lint:fix": "standard --fix",
     "test:unit": "npm run build && jest --testPathPattern=dist/",
     "build": "tsc -p tsconfig.json",
+    "build:production": "tsc -p tsconfig.production.json",
     "start": "npm run clean && npm run build && node dist/index.js",
     "clean": "rm -rf dist",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -19,7 +20,7 @@
     "redis:up": "docker-compose up -d redis",
     "redis:down": "docker-compose down",
     "redis:delete": "docker-compose down -v",
-    "system:up": " npm run clean && npm run build && docker-compose up --build",
+    "system:up": " npm run clean && npm run build:production && docker-compose up --build",
     "system:down": "docker-compose down",
     "system:nuke": "docker-compose down -v --rmi all"
   },
