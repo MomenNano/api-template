@@ -9,6 +9,9 @@ on:
     paths-ignore:
       - '*.md'
 
+env:
+  DATABASE_URL= ${{ secrets.DATABASE_URL }}
+
 jobs:
   test:
 
