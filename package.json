@@ -4,6 +4,7 @@
   "description": "Fastify API Template. Written with TypeScript.",
   "main": "index.js",
   "scripts": {
+    "create:env": "node -r fs -e \"fs.copyFileSync('.env.sample', '.env', fs.constants.COPYFILE_EXCL)\"",
     "lint": "ts-standard | snazzy",
     "lint:fix": "standard --fix",
     "test:unit": "npm run build && jest --testPathPattern=dist/",
