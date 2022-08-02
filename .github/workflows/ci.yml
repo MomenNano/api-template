@@ -17,6 +17,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: create .env file
+      run: npm run create:env
+
     - name: Start containers
       run: npm run redis:up && npm run db:up
 
