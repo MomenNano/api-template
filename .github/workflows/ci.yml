@@ -10,7 +10,7 @@ on:
       - '*.md'
 
 env:
-  DATABASE_URL= ${{ secrets.DATABASE_URL }}
+  DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
 jobs:
   test:
