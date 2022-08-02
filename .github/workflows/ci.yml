@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    paths-ignore:
+      - '*.md'
+  
+  pull_request:
+    paths-ignore:
+      - '*.md'
+
+env:
+  DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: create .env file
+      run: npm run create:env
+
+    - name: Start containers
+      env:
+        POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+        POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+        POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+      run: npm run redis:up && npm run db:up
+
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+
+    - name: Install Dependencies
+      run: npm  install --ignore-scripts
+
+    - name: Prisma generate
+      run: npx prisma generate
+
+    - name: Run Tests
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      run: npm run test:unit
