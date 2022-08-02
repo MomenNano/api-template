@@ -24,6 +24,10 @@ jobs:
       run: npm run create:env
 
     - name: Start containers
+      env:
+        POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+        POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+        POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
       run: npm run redis:up && npm run db:up
 
     - name: Use Node.js
