@@ -1,20 +1,26 @@
-import fp from 'fastify-plugin'
 import sensible from '@fastify/sensible'
 import autoload from '@fastify/autoload'
 import helmet from '@fastify/helmet'
 import { join } from 'path'
-import { FastifyPluginAsync } from 'fastify'
+import fastify, { FastifyInstance } from 'fastify'
 
-const build: FastifyPluginAsync = async (fastify) => {
-  void fastify.register(sensible)
+export default function (opts = {}): FastifyInstance {
+  const app = fastify(opts)
 
-  void fastify.register(autoload, {
+  void app.register(sensible)
+
+  void app.register(autoload, {
     dir: join(__dirname, 'plugins')
   })
 
-  void fastify.register(helmet)
+  void app.register(autoload, {
+    dir: join(__dirname, 'routes'),
+    routeParams: true
+  })
 
-  fastify.setErrorHandler((err, req, res) => {
+  void app.register(helmet)
+
+  app.setErrorHandler((err, req, res) => {
     if (res.statusCode >= 500) {
       req.log.error({ req, res, err }, err?.message)
     } else if (res.statusCode >= 400) {
@@ -23,6 +29,6 @@ const build: FastifyPluginAsync = async (fastify) => {
 
     void res.send(err)
   })
-}
 
-export default fp(build)
+  return app
+}
