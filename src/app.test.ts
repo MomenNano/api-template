@@ -1,12 +1,11 @@
-import fastify, { FastifyInstance } from 'fastify'
+import { FastifyInstance } from 'fastify'
 import build from './app'
 
 describe('server', () => {
   describe('plugins', () => {
     let server: FastifyInstance
     beforeAll(async () => {
-      server = fastify()
-      void server.register(build)
+      server = build()
       await server.ready()
     })
 
