@@ -1,4 +1,3 @@
-import fastify from 'fastify'
 import app from './src/app'
 
 /*
@@ -9,17 +8,12 @@ import './src/config'
 /*
   initialize fastify
 */
-const server = fastify({
+const server = app({
   ignoreTrailingSlash: true,
   logger: {
     level: process.env.LOG_LEVEL
   }
 })
-
-/*
-  register app plugin
-*/
-void server.register(app)
 
 /*
   start and listen to connections
